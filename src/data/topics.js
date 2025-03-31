@@ -14,24 +14,77 @@ export const topics = {
             <h3>Basic Syntax</h3>
             <pre><code>{```// Basic closure syntax
 let simpleClosure = { (parameters) -> ReturnType in
-// closure body
+    // closure body
 }
+
 // Example
 let numbers = [1, 2, 3, 4, 5]
 let sortedNumbers = numbers.sorted { $0 < $1 }
+
 // More complex example with capture list
 var counter = 0
 let incrementCounter = { [weak self] in
-counter += 1
-print("Counter is now \(counter)")
+    counter += 1
+    print("Counter is now \(counter)")
 }```}</code></pre>
             
             <h3>Types of Closures</h3>
             <ul>
-              <li>Global functions</li>
-              <li>Nested functions</li>
-              <li>Closure expressions</li>
+              <li><strong>Global functions:</strong> Functions that are defined at the global scope</li>
+              <li><strong>Nested functions:</strong> Functions defined inside other functions</li>
+              <li><strong>Closure expressions:</strong> Anonymous functions that can capture values from their surrounding context</li>
             </ul>
+
+            <h3>Closure Capture Lists</h3>
+            <p>Capture lists help prevent retain cycles and control how values are captured in closures:</p>
+            <pre><code>{```// Capture list syntax
+[weak self] // Weak reference to self
+[unowned self] // Unowned reference to self
+[weak delegate = self.delegate] // Weak reference to a property
+[unowned delegate = self.delegate] // Unowned reference to a property```}</code></pre>
+
+            <h3>Trailing Closure Syntax</h3>
+            <p>Swift provides a cleaner syntax for closures when they are the last parameter:</p>
+            <pre><code>{```// Without trailing closure
+someFunction(parameter: value, closure: { (parameter) in
+    // closure body
+})
+
+// With trailing closure
+someFunction(parameter: value) { (parameter) in
+    // closure body
+}```}</code></pre>
+
+            <h3>Common Use Cases</h3>
+            <ul>
+              <li><strong>Completion Handlers:</strong> Used in asynchronous operations</li>
+              <li><strong>Higher-Order Functions:</strong> Functions that take other functions as parameters</li>
+              <li><strong>Animation Blocks:</strong> Used in UI animations</li>
+              <li><strong>Network Callbacks:</strong> Handling asynchronous network requests</li>
+            </ul>
+
+            <h3>Best Practices</h3>
+            <ul>
+              <li>Use capture lists to avoid retain cycles</li>
+              <li>Prefer trailing closure syntax for better readability</li>
+              <li>Use weak references when appropriate</li>
+              <li>Keep closures concise and focused</li>
+            </ul>
+
+            <h3>Example: Network Request with Closure</h3>
+            <pre><code>{```func fetchData(completion: @escaping (Result<Data, Error>) -> Void) {
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        if let error = error {
+            completion(.failure(error))
+            return
+        }
+        guard let data = data else {
+            completion(.failure(NSError(domain: "", code: -1)))
+            return
+        }
+        completion(.success(data))
+    }.resume()
+}```}</code></pre>
           </>
         )
       },
