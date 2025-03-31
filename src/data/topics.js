@@ -39,7 +39,7 @@ export const topics = {
         "id": "closures",
         "title": "Closures",
         "content": {
-          "introduction": "Closures are self-contained blocks of code that can be passed around and used in your code.",
+          "introduction": "Closures are self-contained blocks of code that can be passed around and used in your code. They are similar to functions but can capture and store references to any constants and variables from the context in which they are defined.",
           "keyConcepts": [
             "Basic Syntax",
             "Capture Lists",
