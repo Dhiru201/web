@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Core - My Learning Journey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">My Learning Journey</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#topics">Topics</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="topic-container">
+        <aside class="side-menu">
+            <h3>iOS Core Topics</h3>
+            <ul class="topic-list">
+                <li class="active"><a href="#closures">Mastering Swift Closures</a></li>
+                <li><a href="#memory">Mastering iOS Memory Management</a></li>
+                <li><a href="#stack">Mastering in Stack Memory Management</a></li>
+                <li><a href="#heap">Mastering in Heap Memory Management</a></li>
+            </ul>
+        </aside>
+        <main class="topic-content">
+            <section id="closures" class="topic-section active">
+                <h2>Mastering Swift Closures</h2>
+                <div class="content">
+                    <h3>Introduction to Closures</h3>
+                    <p>Closures are self-contained blocks of code that can be passed around and used in your code. They are similar to functions but can capture and store references to any constants and variables from the context in which they are defined.</p>
+                    
+                    <h3>Basic Syntax</h3>
+                    <pre><code>
+let simpleClosure = { (parameters) -> ReturnType in
+    // closure body
+}
+                    </code></pre>
+                    
+                    <h3>Types of Closures</h3>
+                    <ul>
+                        <li>Global functions</li>
+                        <li>Nested functions</li>
+                        <li>Closure expressions</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="memory" class="topic-section">
+                <h2>Mastering iOS Memory Management</h2>
+                <div class="content">
+                    <h3>Introduction to Memory Management</h3>
+                    <p>Memory management is crucial for creating efficient iOS applications. Understanding how memory works in iOS helps prevent memory leaks and improve app performance.</p>
+                    
+                    <h3>Key Concepts</h3>
+                    <ul>
+                        <li>Reference Counting</li>
+                        <li>Strong and Weak References</li>
+                        <li>Retain Cycles</li>
+                        <li>ARC (Automatic Reference Counting)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="stack" class="topic-section">
+                <h2>Mastering in Stack Memory Management</h2>
+                <div class="content">
+                    <h3>Stack Memory Overview</h3>
+                    <p>The stack is a region of memory that stores local variables and function call information. It's managed automatically by the system and follows a Last-In-First-Out (LIFO) structure.</p>
+                    
+                    <h3>Key Points</h3>
+                    <ul>
+                        <li>Stack vs Heap</li>
+                        <li>Stack Frame</li>
+                        <li>Stack Overflow</li>
+                        <li>Memory Allocation on Stack</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="heap" class="topic-section">
+                <h2>Mastering in Heap Memory Management</h2>
+                <div class="content">
+                    <h3>Heap Memory Overview</h3>
+                    <p>The heap is a region of memory used for dynamic memory allocation. Unlike the stack, heap memory is not automatically managed and requires explicit memory management.</p>
+                    
+                    <h3>Key Concepts</h3>
+                    <ul>
+                        <li>Dynamic Memory Allocation</li>
+                        <li>Memory Fragmentation</li>
+                        <li>Garbage Collection</li>
+                        <li>Memory Leaks</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 My Learning Journey. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

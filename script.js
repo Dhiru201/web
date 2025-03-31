@@ -57,4 +57,42 @@ document.querySelectorAll('section').forEach(section => {
     section.style.transform = 'translateY(20px)';
     section.style.transition = 'all 0.6s ease-out';
     observer.observe(section);
+});
+
+// Topic Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle topic list navigation
+    const topicLinks = document.querySelectorAll('.topic-list a');
+    const topicSections = document.querySelectorAll('.topic-section');
+    
+    topicLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links and sections
+            topicLinks.forEach(l => l.parentElement.classList.remove('active'));
+            topicSections.forEach(s => s.classList.remove('active'));
+            
+            // Add active class to clicked link and corresponding section
+            this.parentElement.classList.add('active');
+            const targetId = this.getAttribute('href').substring(1);
+            document.getElementById(targetId).classList.add('active');
+            
+            // Scroll to the section
+            document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    
+    // Handle URL hash on page load
+    const hash = window.location.hash;
+    if (hash) {
+        const targetId = hash.substring(1);
+        const targetLink = document.querySelector(`.topic-list a[href="${hash}"]`);
+        const targetSection = document.getElementById(targetId);
+        
+        if (targetLink && targetSection) {
+            targetLink.parentElement.classList.add('active');
+            targetSection.classList.add('active');
+        }
+    }
 }); 
