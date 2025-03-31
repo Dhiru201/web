@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Learning Journey</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      var r = l.pathname.split('/').slice(1);
+      var s = r.slice(0, pathSegmentsToKeep).join('/') + '/?p=' + r.slice(pathSegmentsToKeep).join('/');
+      var h = l.hash;
+      var q = l.search;
+      var m = l.pathname.match(/\.html$/);
+      if (m) {
+        l.replace(
+          l.protocol + '//' + l.host + (s ? (s + q + h) : (r.join('/') + q + h))
+        );
+      } else {
+        l.replace(
+          l.protocol + '//' + l.host + (s ? (s + q + h) : (r.join('/') + q + h))
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <a href="https://github.com/rafgraph/spa-github-pages">Single Page Apps for GitHub Pages</a>
+    </noscript>
+  </body>
+</html> 
