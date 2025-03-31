@@ -43,4 +43,12 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build
-          branch: gh-pages 
+          branch: gh-pages
+          clean: true
+          commit-message: "Deploy React app to GitHub Pages"
+
+      - name: Verify deployment
+        run: |
+          echo "Waiting for GitHub Pages to update..."
+          sleep 30
+          curl -s https://dhiru201.github.io/web/ | grep -q "My Learning Journey" && echo "Deployment successful!" || echo "Deployment might have failed" 
