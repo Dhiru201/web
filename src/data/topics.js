@@ -8,12 +8,23 @@ export const topics = {
         content: (
           <>
             <h3>Introduction to Closures</h3>
-            <p>Closures are self-contained blocks of code that can be passed around and used in your code. They are similar to functions but can capture and store references to any constants and variables from the context in which they are defined.</p>
+            <p>Closures are self-contained blocks of code that can be passed around and used in your code. They are similar to functions but can capture and store references to variables and constants from the context in which they are defined. Think of closures as functions that can be assigned to variables, passed as arguments, and returned from other functions.
+            This makes Swift a powerful functional programming language while maintaining its object-oriented capabilities.</p>
             
             <h3>Basic Syntax</h3>
-            <pre><code>{`let simpleClosure = { (parameters) -> ReturnType in
-    // closure body
-}`}</code></pre>
+            <pre><code>{```// Basic closure syntax
+let simpleClosure = { (parameters) -> ReturnType in
+// closure body
+}
+// Example
+let numbers = [1, 2, 3, 4, 5]
+let sortedNumbers = numbers.sorted { $0 < $1 }
+// More complex example with capture list
+var counter = 0
+let incrementCounter = { [weak self] in
+counter += 1
+print("Counter is now \(counter)")
+}```}</code></pre>
             
             <h3>Types of Closures</h3>
             <ul>
