@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
@@ -11,19 +9,24 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <nav className="navbar">
-      <div className="nav-brand">
-        <Link to="/">Dhirendra</Link>
+      <div className="navbar-brand">
+        <Link to="/" onClick={closeMenu}>Dhirendra</Link>
       </div>
-      <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-        <Link to="/">Home</Link>
-        <Link to="/topics">Topics</Link>
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
+      <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+        <Link to="/#topics" onClick={closeMenu}>Topics</Link>
+        <Link to="/#about" onClick={closeMenu}>About</Link>
+        <Link to="/#contact" onClick={closeMenu}>Contact</Link>
       </div>
-      <div className="menu-btn" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+      <div className="navbar-burger" onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </nav>
   );
