@@ -1,0 +1,33 @@
+{
+  "id": "memory-management",
+  "title": "Memory Management",
+  "content": {
+    "introduction": "Memory management is a crucial aspect of iOS development that ensures efficient resource utilization and prevents memory leaks.",
+    "keyConcepts": [
+      "ARC (Automatic Reference Counting)",
+      "Strong and Weak References",
+      "Retain Cycles",
+      "Memory Leaks"
+    ],
+    "details": {
+      "arc": {
+        "title": "ARC (Automatic Reference Counting)",
+        "description": "ARC is a compiler feature that automatically manages memory by tracking and managing object references.",
+        "examples": [
+          "Strong references",
+          "Weak references",
+          "Unowned references"
+        ]
+      },
+      "retainCycles": {
+        "title": "Retain Cycles",
+        "description": "A retain cycle occurs when two or more objects hold strong references to each other, preventing them from being deallocated.",
+        "solutions": [
+          "Using weak references",
+          "Using unowned references",
+          "Breaking circular dependencies"
+        ]
+      }
+    }
+  }
+} 

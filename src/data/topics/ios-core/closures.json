@@ -1,0 +1,33 @@
+{
+  "id": "closures",
+  "title": "Closures",
+  "content": {
+    "introduction": "Closures are self-contained blocks of code that can be passed around and used in your code.",
+    "keyConcepts": [
+      "Basic Syntax",
+      "Capture Lists",
+      "Trailing Closures",
+      "Escaping Closures"
+    ],
+    "details": {
+      "basicSyntax": {
+        "title": "Basic Syntax",
+        "description": "Closures can be written in several forms, from the most verbose to the most concise.",
+        "examples": [
+          "Full closure syntax",
+          "Inferring types",
+          "Implicit returns"
+        ]
+      },
+      "captureLists": {
+        "title": "Capture Lists",
+        "description": "Capture lists help prevent retain cycles by explicitly specifying how to capture values in a closure.",
+        "examples": [
+          "Using weak self",
+          "Using unowned self",
+          "Capturing specific values"
+        ]
+      }
+    }
+  }
+} 

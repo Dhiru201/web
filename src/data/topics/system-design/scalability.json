@@ -1,0 +1,29 @@
+{
+  "id": "scalability",
+  "title": "Scalability",
+  "content": {
+    "introduction": "Scalability is the ability of a system to handle growing amounts of work in a graceful manner.",
+    "keyConcepts": [
+      "Vertical Scaling",
+      "Horizontal Scaling",
+      "Load Balancing",
+      "Caching"
+    ],
+    "details": {
+      "verticalScaling": {
+        "title": "Vertical Scaling",
+        "description": "Adding more resources to a single node in the system.",
+        "pros": [
+          "Simpler architecture",
+          "Lower latency",
+          "Easier maintenance"
+        ],
+        "cons": [
+          "Limited by hardware",
+          "Single point of failure",
+          "Higher cost per unit"
+        ]
+      }
+    }
+  }
+} 

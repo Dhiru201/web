@@ -1,0 +1,25 @@
+{
+  "id": "arrays",
+  "title": "Arrays",
+  "content": {
+    "introduction": "Arrays are fundamental data structures that store elements in contiguous memory locations.",
+    "keyConcepts": [
+      "Time Complexity",
+      "Space Complexity",
+      "Operations",
+      "Use Cases"
+    ],
+    "details": {
+      "timeComplexity": {
+        "title": "Time Complexity",
+        "description": "Understanding the time complexity of array operations.",
+        "operations": {
+          "access": "O(1)",
+          "search": "O(n)",
+          "insertion": "O(n)",
+          "deletion": "O(n)"
+        }
+      }
+    }
+  }
+} 

@@ -7,13 +7,24 @@ const TopicPage = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = useState('');
   const [topicData, setTopicData] = useState(null);
+  const [subtopics, setSubtopics] = useState([]);
 
   useEffect(() => {
-    // Fetch the JSON data
-    fetch('/data/data.json')
+    // Fetch the topic index file
+    fetch(`/data/topics/${topicId}/index.json`)
       .then(response => response.json())
       .then(data => {
-        setTopicData(data[topicId]);
+        setTopicData(data);
+        // Fetch all subtopics
+        return Promise.all(
+          data.subtopics.map(subtopicId =>
+            fetch(`/data/topics/${topicId}/${subtopicId}.json`)
+              .then(response => response.json())
+          )
+        );
+      })
+      .then(subtopicsData => {
+        setSubtopics(subtopicsData);
       })
       .catch(error => console.error('Error loading topic data:', error));
   }, [topicId]);
@@ -22,10 +33,10 @@ const TopicPage = () => {
     const hash = location.hash.substring(1);
     if (hash) {
       setActiveSection(hash);
-    } else if (topicData?.subtopics.length > 0) {
-      setActiveSection(topicData.subtopics[0].id);
+    } else if (subtopics.length > 0) {
+      setActiveSection(subtopics[0].id);
     }
-  }, [location.hash, topicId, topicData]);
+  }, [location.hash, topicId, subtopics]);
 
   const handleTopicClick = (topicId) => {
     setActiveSection(topicId);
@@ -38,7 +49,7 @@ const TopicPage = () => {
       <aside className="side-menu">
         <h3>{topicData.title} Topics</h3>
         <ul className="topic-list">
-          {topicData.subtopics.map((subtopic) => (
+          {subtopics.map((subtopic) => (
             <li key={subtopic.id} className={activeSection === subtopic.id ? 'active' : ''}>
               <a href={`#${subtopic.id}`} onClick={() => handleTopicClick(subtopic.id)}>
                 {subtopic.title}
@@ -48,7 +59,7 @@ const TopicPage = () => {
         </ul>
       </aside>
       <main className="topic-content">
-        {topicData.subtopics.map((subtopic) => (
+        {subtopics.map((subtopic) => (
           <section
             key={subtopic.id}
             id={subtopic.id}
