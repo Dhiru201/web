@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMobileAlt, faSitemap, faCode } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -38,11 +38,11 @@ const Home = () => {
       <section id="topics" className="topics-section">
         <h2>Learning Topics</h2>
         <div className="topics-grid">
-          <div className="topic-card">
+          <Link to="/ios-core" className="topic-card">
             <FontAwesomeIcon icon={faMobileAlt} />
             <h3>iOS Core</h3>
             <p>Deep dive into iOS development fundamentals</p>
-          </div>
+          </Link>
           <div className="topic-card">
             <FontAwesomeIcon icon={faSitemap} />
             <h3>System Design</h3>

@@ -1,0 +1,30 @@
+{
+  "id": "concurrency",
+  "title": "Concurrency in iOS",
+  "sections": [
+    {
+      "title": "Introduction",
+      "content": "Concurrency in iOS allows multiple tasks to run simultaneously, improving app performance and responsiveness. iOS provides several mechanisms for handling concurrency, including Grand Central Dispatch (GCD), Operation Queues, and async/await."
+    },
+    {
+      "title": "Grand Central Dispatch (GCD)",
+      "content": "GCD is a low-level API for managing concurrent operations. It provides dispatch queues for executing tasks:\n\n```swift\n// Serial Queue\nlet serialQueue = DispatchQueue(label: \"com.example.serial\")\n\n// Concurrent Queue\nlet concurrentQueue = DispatchQueue(label: \"com.example.concurrent\", attributes: .concurrent)\n\n// Main Queue (UI updates)\nDispatchQueue.main.async {\n    // Update UI\n}\n\n// Background Queue\nDispatchQueue.global(qos: .background).async {\n    // Perform heavy task\n    DispatchQueue.main.async {\n        // Update UI with results\n    }\n}\n```"
+    },
+    {
+      "title": "Operation Queues",
+      "content": "Operation Queues provide a higher-level abstraction over GCD, allowing for more complex task management:\n\n```swift\nclass DownloadOperation: Operation {\n    override func main() {\n        guard !isCancelled else { return }\n        \n        // Download task\n        // ...\n        \n        if !isCancelled {\n            // Process downloaded data\n        }\n    }\n}\n\nlet queue = OperationQueue()\nqueue.maxConcurrentOperationCount = 3\n\nlet downloadOp = DownloadOperation()\nqueue.addOperation(downloadOp)\n```"
+    },
+    {
+      "title": "Async/Await",
+      "content": "Swift's modern concurrency model using async/await provides a more readable way to handle asynchronous code:\n\n```swift\nfunc fetchData() async throws -> Data {\n    let url = URL(string: \"https://api.example.com/data\")!\n    let (data, _) = try await URLSession.shared.data(from: url)\n    return data\n}\n\nTask {\n    do {\n        let data = try await fetchData()\n        // Process data\n    } catch {\n        // Handle error\n    }\n}\n```"
+    },
+    {
+      "title": "Thread Safety",
+      "content": "Ensuring thread safety is crucial in concurrent programming:\n\n```swift\nclass ThreadSafeCounter {\n    private let queue = DispatchQueue(label: \"com.example.counter\")\n    private var _count = 0\n    \n    var count: Int {\n        queue.sync { _count }\n    }\n    \n    func increment() {\n        queue.async(flags: .barrier) {\n            self._count += 1\n        }\n    }\n}\n```"
+    },
+    {
+      "title": "Common Patterns",
+      "content": "Here are some common concurrency patterns in iOS:\n\n1. Background Processing\n```swift\nfunc processImage() {\n    DispatchQueue.global(qos: .userInitiated).async {\n        let processedImage = self.applyFilters()\n        DispatchQueue.main.async {\n            self.imageView.image = processedImage\n        }\n    }\n}\n```\n\n2. Grouping Tasks\n```swift\nlet group = DispatchGroup()\n\ngroup.enter()\nfetchUserData { group.leave() }\n\ngroup.enter()\nfetchUserSettings { group.leave() }\n\ngroup.notify(queue: .main) {\n    // All tasks completed\n}\n```\n\n3. Rate Limiting\n```swift\nclass RateLimiter {\n    private let queue = DispatchQueue(label: \"com.example.ratelimiter\")\n    private var workItem: DispatchWorkItem?\n    \n    func perform(action: @escaping () -> Void) {\n        workItem?.cancel()\n        \n        let newWorkItem = DispatchWorkItem(block: action)\n        workItem = newWorkItem\n        \n        queue.asyncAfter(deadline: .now() + 0.3, execute: newWorkItem)\n    }\n}\n```"
+    }
+  ]
+} 

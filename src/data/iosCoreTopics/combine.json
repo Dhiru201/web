@@ -1,0 +1,30 @@
+{
+  "id": "combine",
+  "title": "Combine Framework in iOS",
+  "sections": [
+    {
+      "title": "Introduction",
+      "content": "Combine is Apple's framework for handling asynchronous events and data streams. It provides a declarative Swift API for processing values over time, making it easier to handle complex asynchronous operations. This guide covers Combine fundamentals and advanced concepts."
+    },
+    {
+      "title": "Publishers and Subscribers",
+      "content": "Core Combine concepts and their usage:\n\n```swift\nimport Combine\n\n// Publisher example\nstruct NumberPublisher: Publisher {\n    typealias Output = Int\n    typealias Failure = Never\n    \n    func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {\n        let subscription = NumberSubscription(subscriber: subscriber)\n        subscriber.receive(subscription: subscription)\n    }\n}\n\n// Subscriber example\nclass NumberSubscriber: Subscriber {\n    typealias Input = Int\n    typealias Failure = Never\n    \n    func receive(subscription: Subscription) {\n        subscription.request(.unlimited)\n    }\n    \n    func receive(_ input: Int) -> Subscribers.Demand {\n        print(\"Received value: \" + String(input))\n        return .none\n    }\n    \n    func receive(completion: Subscribers.Completion<Never>) {\n        print(\"Completed\")\n    }\n}\n\n// Usage\nlet publisher = NumberPublisher()\nlet subscriber = NumberSubscriber()\npublisher.subscribe(subscriber)\n```"
+    },
+    {
+      "title": "Operators",
+      "content": "Common Combine operators and their usage:\n\n```swift\nimport Combine\n\n// Map operator\nlet numbers = [1, 2, 3, 4, 5]\nlet publisher = numbers.publisher\n\npublisher\n    .map { $0 * 2 }\n    .sink { print($0) }\n\n// Filter operator\npublisher\n    .filter { $0 % 2 == 0 }\n    .sink { print($0) }\n\n// CombineLatest operator\nlet publisher1 = PassthroughSubject<Int, Never>()\nlet publisher2 = PassthroughSubject<String, Never>()\n\npublisher1\n    .combineLatest(publisher2)\n    .sink { print(String($0) + \", \" + $1) }\n\n// Merge operator\nlet publisher3 = PassthroughSubject<Int, Never>()\nlet publisher4 = PassthroughSubject<Int, Never>()\n\npublisher3\n    .merge(with: publisher4)\n    .sink { print($0) }\n\n// Debounce operator\nlet textPublisher = PassthroughSubject<String, Never>()\n\ntextPublisher\n    .debounce(for: .seconds(0.5), scheduler: RunLoop.main)\n    .sink { print($0) }\n```"
+    },
+    {
+      "title": "Subjects",
+      "content": "Using Combine subjects for custom publishers:\n\n```swift\nimport Combine\n\n// PassthroughSubject example\nclass ViewModel {\n    private let subject = PassthroughSubject<String, Never>()\n    var publisher: AnyPublisher<String, Never> {\n        subject.eraseToAnyPublisher()\n    }\n    \n    func sendValue(_ value: String) {\n        subject.send(value)\n    }\n    \n    func complete() {\n        subject.send(completion: .finished)\n    }\n}\n\n// CurrentValueSubject example\nclass SettingsManager {\n    private let subject = CurrentValueSubject<Bool, Never>(false)\n    var isEnabled: Bool {\n        get { subject.value }\n        set { subject.send(newValue) }\n    }\n    \n    var publisher: AnyPublisher<Bool, Never> {\n        subject.eraseToAnyPublisher()\n    }\n}\n\n// Usage\nlet viewModel = ViewModel()\nviewModel.publisher\n    .sink { print($0) }\nviewModel.sendValue(\"Hello\")\n\nlet settings = SettingsManager()\nsettings.publisher\n    .sink { print(\"Settings changed: \" + String($0)) }\nsettings.isEnabled = true\n```"
+    },
+    {
+      "title": "Error Handling",
+      "content": "Handling errors in Combine:\n\n```swift\nimport Combine\n\n// Error type\nenum NetworkError: Error {\n    case invalidURL\n    case requestFailed\n    case decodingFailed\n}\n\n// Error handling operators\nlet publisher = PassthroughSubject<Int, NetworkError>()\n\npublisher\n    .tryMap { value -> Int in\n        if value < 0 {\n            throw NetworkError.requestFailed\n        }\n        return value\n    }\n    .catch { error -> Just<Int> in\n        print(\"Error: \" + String(describing: error))\n        return Just(0)\n    }\n    .sink(\n        receiveCompletion: { completion in\n            if case .failure(let error) = completion {\n                print(\"Failed with error: \" + String(describing: error))\n            }\n        },\n        receiveValue: { value in\n            print(\"Received value: \" + String(value))\n        }\n    )\n\n// Retry operator\nlet failingPublisher = PassthroughSubject<Int, NetworkError>()\n\nfailingPublisher\n    .tryMap { value -> Int in\n        if value == 0 {\n            throw NetworkError.requestFailed\n        }\n        return value\n    }\n    .retry(3)\n    .sink(\n        receiveCompletion: { print($0) },\n        receiveValue: { print($0) }\n    )\n```"
+    },
+    {
+      "title": "Schedulers",
+      "content": "Using schedulers for thread management:\n\n```swift\nimport Combine\n\n// DispatchQueue scheduler\nlet queue = DispatchQueue(label: \"com.example.queue\")\nlet publisher = PassthroughSubject<Int, Never>()\n\npublisher\n    .subscribe(on: queue)\n    .receive(on: DispatchQueue.main)\n    .sink { print(\"Received on main thread: \" + String($0)) }\n\n// RunLoop scheduler\nlet runLoop = RunLoop.current\npublisher\n    .receive(on: runLoop)\n    .sink { print(\"Received on run loop: \" + String($0)) }\n\n// OperationQueue scheduler\nlet operationQueue = OperationQueue()\noperationQueue.maxConcurrentOperationCount = 1\n\npublisher\n    .receive(on: operationQueue)\n    .sink { print(\"Received on operation queue: \" + String($0)) }\n\n// Immediate scheduler\npublisher\n    .receive(on: ImmediateScheduler.shared)\n    .sink { print(\"Received immediately: \" + String($0)) }\n```"
+    }
+  ]
+} 

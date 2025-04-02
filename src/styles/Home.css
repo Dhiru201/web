@@ -51,31 +51,35 @@ h2 {
 
 .topic-card {
   background: white;
-  padding: 2rem;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .topic-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .topic-card svg {
   font-size: 2.5rem;
-  color: #007bff;
-  margin-bottom: 1rem;
+  color: #ff0000;
+  margin-bottom: 20px;
 }
 
 .topic-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin: 15px 0;
   color: #333;
 }
 
 .topic-card p {
   color: #666;
+  margin-bottom: 0;
 }
 
 /* About Section */

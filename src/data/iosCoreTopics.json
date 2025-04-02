@@ -1,0 +1,108 @@
+{
+  "id": "ios-core-topics",
+  "title": "iOS Core Topics",
+  "topics": [
+    {
+      "id": "closures",
+      "title": "Closures",
+      "description": "Learn about closures in Swift, including syntax, capturing values, and common use cases. Understand how closures enable functional programming patterns and callback mechanisms.",
+      "file": "closures.json"
+    },
+    {
+      "id": "memory-management",
+      "title": "Memory Management",
+      "description": "Explore Swift's memory management system, including Automatic Reference Counting (ARC), strong and weak references, and memory optimization techniques.",
+      "file": "memory-management.json"
+    },
+    {
+      "id": "concurrency",
+      "title": "Concurrency",
+      "description": "Master concurrent programming in Swift using Grand Central Dispatch (GCD), Operation Queues, and async/await patterns for efficient multitasking.",
+      "file": "concurrency.json"
+    },
+    {
+      "id": "protocols",
+      "title": "Protocols",
+      "description": "Understand protocol-oriented programming in Swift, including protocol syntax, extensions, and how to use protocols for code organization and reuse.",
+      "file": "protocols.json"
+    },
+    {
+      "id": "delegation",
+      "title": "Delegation",
+      "description": "Learn the delegation pattern in iOS, a fundamental design pattern for communication between objects and handling events.",
+      "file": "delegation.json"
+    },
+    {
+      "id": "notifications",
+      "title": "Notifications",
+      "description": "Explore notification systems in iOS, including local notifications, push notifications, and the NotificationCenter for app-wide communication.",
+      "file": "notifications.json"
+    },
+    {
+      "id": "data-persistence",
+      "title": "Data Persistence",
+      "description": "Master various data persistence techniques in iOS, including UserDefaults, File System, Core Data, and SQLite for storing app data.",
+      "file": "data-persistence.json"
+    },
+    {
+      "id": "networking",
+      "title": "Networking",
+      "description": "Learn about networking in iOS apps using URLSession, handling HTTP requests, managing network states, and implementing robust network layers.",
+      "file": "networking.json"
+    },
+    {
+      "id": "ui-components",
+      "title": "UI Components",
+      "description": "Explore UIKit components, their customization, and best practices for building user interfaces in iOS applications.",
+      "file": "ui-components.json"
+    },
+    {
+      "id": "architecture-patterns",
+      "title": "Architecture Patterns",
+      "description": "Understand various architecture patterns like MVC, MVVM, VIPER, and Clean Architecture for organizing iOS app code.",
+      "file": "architecture-patterns.json"
+    },
+    {
+      "id": "testing",
+      "title": "Testing",
+      "description": "Learn about testing methodologies in iOS, including unit testing, UI testing, and integration testing using XCTest framework.",
+      "file": "testing.json"
+    },
+    {
+      "id": "swiftui",
+      "title": "SwiftUI",
+      "description": "Explore SwiftUI, Apple's modern framework for building user interfaces across all Apple platforms using declarative syntax.",
+      "file": "swiftui.json"
+    },
+    {
+      "id": "combine",
+      "title": "Combine",
+      "description": "Master the Combine framework for handling asynchronous events and data streams in a declarative way.",
+      "file": "combine.json"
+    },
+    {
+      "id": "core-data",
+      "title": "Core Data",
+      "description": "Learn about Core Data framework for managing model layer objects, including data modeling, persistence, and relationships.",
+      "file": "core-data.json"
+    },
+    {
+      "id": "uikit",
+      "title": "UIKit",
+      "description": "Understand UIKit framework, the foundation for building user interfaces in iOS apps, including views, controls, and view controllers.",
+      "file": "uikit.json"
+    },
+    {
+      "id": "app-architecture",
+      "title": "App Architecture",
+      "description": "Explore comprehensive app architecture concepts, including design patterns, dependency injection, and modular app structure.",
+      "file": "app-architecture.json"
+    },
+    {
+      "id": "debugging-instruments",
+      "title": "Debugging and Instruments",
+      "description": "Master debugging techniques and Instruments tools for identifying and fixing issues in iOS applications.",
+      "file": "debugging-instruments.json"
+    }
+  ]
+} 
