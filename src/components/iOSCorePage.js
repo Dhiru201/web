@@ -49,24 +49,29 @@ const IOSCorePage = () => {
   };
 
   const renderContent = (content) => {
-    // Split content into paragraphs
-    const paragraphs = content.split('\n\n');
+    // First, split the content by code blocks
+    const parts = content.split(/(```[\s\S]*?```)/g);
     
-    return paragraphs.map((paragraph, index) => {
-      // Check if paragraph contains code block
-      if (paragraph.includes('```')) {
-        const codeMatch = paragraph.match(/```swift\n([\s\S]*?)\n```/);
+    return parts.map((part, index) => {
+      // Check if this part is a code block
+      if (part.startsWith('```')) {
+        // Extract the code content, handling both with and without language specifier
+        const codeMatch = part.match(/```(?:swift)?\n?([\s\S]*?)```/);
         if (codeMatch) {
           return (
             <div key={index} className="code-block">
               <pre>
-                <code>{codeMatch[1]}</code>
+                <code>{codeMatch[1].trim()}</code>
               </pre>
             </div>
           );
         }
       }
-      return <p key={index}>{paragraph}</p>;
+      
+      // For non-code parts, split into paragraphs and render
+      return part.split('\n\n').map((paragraph, pIndex) => (
+        <p key={`${index}-${pIndex}`}>{paragraph}</p>
+      ));
     });
   };
 
